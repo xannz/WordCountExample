@@ -4,3 +4,4 @@ topology:
       topologyclass: com.sborny.wordcountexample.WordCountTopology
       packaging: mvn package
       repository: https://github.com/xannz/WordCountExample.git
+      release: https://github.com/xannz/WordCountExample/releases/download/1.0/WordCountExample-1.0-SNAPSHOT.jar
