@@ -1,0 +1,6 @@
+topology:
+    - name: WordCountTopology
+      jar: WordCountExample-1.0-SNAPSHOT.jar
+      topologyclass: com.sborny.wordcountexample.WordCountTopology
+      packaging: mvn package
+      repository: https://github.com/xannz/WordCountExample.git
