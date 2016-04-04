@@ -1,5 +1,5 @@
 topology:
-    - name: WordCountTopology
+    - name: WordCount
       jar: WordCountExample-1.0-SNAPSHOT.jar
       topologyclass: com.sborny.wordcountexample.WordCountTopology
       packaging: mvn package
