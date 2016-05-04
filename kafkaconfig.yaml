@@ -11,6 +11,8 @@ components:
       
   - id: "zkHosts"
     className: "storm.kafka.ZkHosts"
+#   constructorArgs:
+#     - "zookeeper-ip:port"
       
   - id: "spoutConfig"
     className: "storm.kafka.SpoutConfig"
