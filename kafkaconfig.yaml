@@ -1,0 +1,24 @@
+components:
+  - id: "KafkaBoltKeyValueScheme"
+    className: "io.tengu.storm.KafkaBoltKeyValueScheme"
+    constructorArgs:
+      - "message"
+    
+  - id: "MultiScheme"
+    className: "backtype.storm.spout.SchemeAsMultiScheme"
+    constructorArgs:
+      - ref: "KafkaBoltKeyValueScheme"
+      
+  - id: "zkHosts"
+    className: "storm.kafka.ZkHosts"
+      
+  - id: "spoutConfig"
+    className: "storm.kafka.SpoutConfig"
+    constructorArgs:
+      - ref: "zkHosts"
+      - "test"
+      - "/kafkaStorm"
+      - "11111111111111"
+    properties:
+      - name: "scheme"
+        ref: "MultiScheme"
