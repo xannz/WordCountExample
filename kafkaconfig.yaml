@@ -1,6 +1,6 @@
 components:
   - id: "KafkaBoltKeyValueScheme"
-    className: "io.tengu.storm.KafkaBoltKeyValueScheme"
+    className: "tengu.storm.KafkaBoltKeyValueScheme"
     constructorArgs:
       - "message"
     
