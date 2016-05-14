@@ -21,14 +21,20 @@ import org.json.JSONObject;
  * @author sander
  */
 public class MongoBolt extends BaseBasicBolt{
-    private transient MongoDatabase db;
+    private MongoDatabase db;
+    private String message;
+    private String m_ip;
+    private String m_port;
+    private String dbName;
+    private Boolean dbIsSet;
+
     
-    public void prepareConfig(String mongo_ip, String mongoPort){
-        int mongo_port = Integer.parseInt(mongoPort.toString());
-        System.out.format("Mongo_connect: %s:%d ", mongo_ip, mongo_port);
-        MongoClient mongoClient = new MongoClient(mongo_ip, mongo_port);
-        db = mongoClient.getDatabase("demo");
-        System.out.println("GOT_DATABASE");
+    public void prepareConfig(String mongo_ip, String mongoPort, String name, String m){
+	message = m;
+        m_ip = mongo_ip;
+        m_port = mongoPort;
+        dbName = name;
+        dbIsSet = false; 
     }
 
     @Override
@@ -38,12 +44,19 @@ public class MongoBolt extends BaseBasicBolt{
 
     @Override
     public void execute(Tuple input, BasicOutputCollector collector) {
+	if (! dbIsSet){
+                MongoClient mongoClient = new MongoClient(m_ip, Integer.parseInt(m_port));
+                db = mongoClient.getDatabase(dbName);
+                System.out.println("GOT_DATABASE");
+                dbIsSet = true;
+        }
+
         System.out.println("DID_EXECUTE");
-        JSONObject obj = new JSONObject(input.getStringByField("message"));
+        JSONObject obj = new JSONObject(input.getStringByField(message));
         try {
             System.out.println("START_TRY");
-            String collection = obj.getString("installationId");
-            JSONObject json = obj.getJSONObject("message");
+            String collection = obj.getString("collectionId");
+            JSONObject json = obj.getJSONObject(message);
             db.getCollection(collection).insertOne(Document.parse(json.toString()));
             System.out.println("END_TRY");
         } catch (JSONException ex) {

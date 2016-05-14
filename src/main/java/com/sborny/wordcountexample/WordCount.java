@@ -10,11 +10,13 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
+
+
 //There are a variety of bolt types. In this case, we use BaseBasicBolt
 public class WordCount extends BaseBasicBolt {
   //For holding words and counts
     Map<String, Integer> counts = new HashMap<String, Integer>();
-
+    
     //execute is called to process tuples
     @Override
     public void execute(Tuple tuple, BasicOutputCollector collector) {
