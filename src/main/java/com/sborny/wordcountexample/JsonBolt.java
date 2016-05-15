@@ -29,8 +29,8 @@ public class JsonBolt extends BaseBasicBolt{
         String location = tuple.getStringByField("location");
         String avg = tuple.getStringByField("avg");
         
-        String json_message = "{ \"message\": { \"collectionId\": \"" + collectionId + "\", \"message\": {" +
-                "\"location\": \"" + location + "\", \"avg\": \"" + avg + "\" } } }";
+        String json_message = "{ \"collectionId\": \"" + collectionId + "\", \"message\": {" +
+                "\"location\": \"" + location + "\", \"avg\": \"" + avg + "\" } }";
         
         boc.emit(new Values(json_message));
     }
